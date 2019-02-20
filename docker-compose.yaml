@@ -1,0 +1,42 @@
+version: "3.7"
+services:
+        nginx:
+                container_name: nginx
+                image: nginx:latest
+                volumes:
+                        - type: bind
+                          source: ./nginx/nginx.conf
+                          target: /etc/nginx/nginx.conf
+                ports:
+                        - target: 80
+                          published: 80
+                          protocol: tcp
+                depends_on:
+                        - projectreflectionfront
+                        - jenkins
+        activemq:
+                container_name: activeq
+                image: webcenter/activemq:latest
+        mongodb:
+                container_name: mongodb
+                image: mongo
+        jenkins:
+                container_name: jenkins
+                image: bobcrutchley/jenkins:latest
+                ports:
+                        - target: 8080
+                          published: 8080
+                          protocol: tcp
+                volumes:
+                        - type: bind
+                          source: /var/run/docker.sock
+                          target: /var/run/docker.sock
+        projectreflectionfront:
+                container_name: projectreflectionfront
+                image: projectreflectionfront:latest
+                ports:
+                        - target: 3000
+                          published: 3000
+                          protocol: tcp
+                build: ProjectReflectionFront
+
