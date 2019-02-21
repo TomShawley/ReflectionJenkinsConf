@@ -13,7 +13,6 @@ services:
                           protocol: tcp
                 depends_on:
                         - projectreflectionfront
-                        - jenkins
         activemq:
                 container_name: activeq
                 image: webcenter/activemq:latest
@@ -38,5 +37,11 @@ services:
                         - target: 3000
                           published: 3000
                           protocol: tcp
-                build: ProjectReflectionFront
+        projectreflectionfacade:
+                container_name: projectreflectionfacade
+                image: projectreflectionfacade:latest
+                ports:
+                        - target: 8081
+                          published: 8081
+                          protocol: tcp       
 
