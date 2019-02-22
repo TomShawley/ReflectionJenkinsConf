@@ -13,12 +13,18 @@ services:
                           protocol: tcp
                 depends_on:
                         - projectreflectionfront
+                        - projectreflectionfacade
+                        - projectreflectionform
+                        - projectreflectionconsumer
         activemq:
                 container_name: activeq
                 image: webcenter/activemq:latest
         mongodb:
                 container_name: mongodb
                 image: mongo
+        sonarqube:
+                container_name: sonarqube
+                image: sonarqube
         jenkins:
                 container_name: jenkins
                 image: bobcrutchley/jenkins:latest
@@ -43,5 +49,19 @@ services:
                 ports:
                         - target: 8081
                           published: 8081
-                          protocol: tcp       
+                          protocol: tcp
+        projectreflectionform:
+               container_name: projectreflectionform
+               image: projectreflectionform:latest
+               ports: 
+                        - target: 8082
+                          published: 8082
+                          protocol: tcp
+        projectreflectionconsumer:
+                container_name: projectreflectionconsumer
+                image: projectreflectionconsumer:latest
+                ports: 
+                        - target: 8084
+                          published: 8084
+                          protocol: tcp
 
