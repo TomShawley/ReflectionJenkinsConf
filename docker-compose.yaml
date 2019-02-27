@@ -63,5 +63,12 @@ services:
                 ports: 
                         - target: 8084
                           published: 8084
+                          protocol: tcp        
+        projectreflectiondbreader:
+                container_name: projectreflectiondbreader
+                image: projectreflectiondbreader:latest
+                ports:
+                        - target: 8085
+                          published: 8085
                           protocol: tcp
 
